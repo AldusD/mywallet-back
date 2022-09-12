@@ -8,7 +8,7 @@ const getTransfers = async (req, res) => {
 
     try {
         const transfers = await db.collection("transfers").find({ userId: id }).toArray();
-        return res.status(200).send(transfers);
+        return res.status(200).send({transfers});
 
     } catch (error) {
         console.error(error);

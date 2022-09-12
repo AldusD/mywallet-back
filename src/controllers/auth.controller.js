@@ -16,7 +16,7 @@ const login = async (req, res) => {
         const token = uuid();
         const session = await db.collection("sessions").insertOne({ userId: dbUser._id, token});
         console.log(session);
-        return res.status(200).send({ id: dbUser._id, token });
+        return res.status(200).send({ id: dbUser._id, token, name: dbUser.name });
     
     } catch (error) {
         console.error(error);

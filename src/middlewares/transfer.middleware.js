@@ -5,7 +5,7 @@ import db from '../../db.js';
 
 const transferSchema = joi.object({
     value: joi.number().required(),
-    type: joi.string().valid("receive", "pay"),
+    type: joi.string().valid("receive", "pay").required(),
     description: joi.string().required()
 });
 
