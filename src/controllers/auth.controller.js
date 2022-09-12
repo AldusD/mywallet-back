@@ -11,16 +11,16 @@ const login = async (req, res) => {
         const dbUser = await db.collection("users").findOne( { email: user.email });
         console.log(user.password, dbUser)
         const isCorrect = bcrypt.compareSync(user.password, dbUser.password);
-        if(!isCorrect) res.status(401).send("Invalid password");
+        if(!isCorrect) return res.status(401).send("Invalid password");
 
         const token = uuid();
         const session = await db.collection("sessions").insertOne({ userId: dbUser._id, token});
         console.log(session);
-        res.status(200).send({ id: dbUser._id, token });
+        return res.status(200).send({ id: dbUser._id, token });
     
     } catch (error) {
         console.error(error);
-        res.status(500).send("Internal issue, please try again later");        
+        return res.status(500).send("Internal issue, please try again later");        
     }
 
 }
@@ -34,10 +34,10 @@ const signup = async (req, res) => {
 
         const user = await db.collection("users").insertOne({name, email, password: encryptedPassword });
         console.log(user);
-        res.status(201).send("Registered successfully");
+        return res.status(201).send("Registered successfully");
     } catch (error) {
         console.error(error);
-        res.status(500).send("Internal issue, please try again later.");
+        return res.status(500).send("Internal issue, please try again later.");
     }
 }
 
