@@ -10,14 +10,17 @@ const transferSchema = joi.object({
 });
 
 const verifyTokenMiddleware = async (req, res, next) => {
+    console.log('midToken')
     const token = req.headers.authorization?.replace('Bearer ', '');
-    const id = req.params.id;
+    const id = req.params.id || req.body.userId;
 
     try {
         const session = await db.collection("sessions").findOne({ token });
+        console.log(session)
         if(!session) return res.status(401).send("Desconnected.");
 
         const validconnection = session.userId.equals(id);
+        console.log(validconnection)
         if(!validconnection) return res.status(401).send("Desconnected");
 
     } catch (error) {
