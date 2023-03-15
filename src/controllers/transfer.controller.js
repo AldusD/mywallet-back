@@ -25,7 +25,6 @@ const addTransfer = async (req, res) => {
         const transfer = await db.collection("transfers").insertOne({
             value, type, description, userId: id, date
         });
-        console.log(transfer);
         return res.sendStatus(201);
 
     } catch (error) {
@@ -34,14 +33,14 @@ const addTransfer = async (req, res) => {
     }
 }
 
-export const deleteTransfer = async (req, res) => {
+const deleteTransfer = async (req, res) => {
     const transferId = req.body.transferId;
     const userId = res.locals.id;
 
     try {
-        const transfer = await db.collection("transfers").findOne({ id: transferId });
-        if(transfer.userId != userId) return res.sendStatus(401);
-        const transferDelete = await db.collection("transfer").deleteOne({ id: transferId });
+        const transfer = await db.collection("transfers").findOne({ _id: ObjectId(transferId) });
+        if(!(transfer.userId.id === userId.id)) return res.sendStatus(401);
+        const transferDelete = await db.collection("transfers").deleteOne({ _id: ObjectId(transferId) });
         return res.sendStatus(204);
     } catch (error) {
         console.error(error);
@@ -49,15 +48,15 @@ export const deleteTransfer = async (req, res) => {
     }
 }
 
-export const putTransfer = async (req, res) => {
-    console.log('deltr');
+const putTransfer = async (req, res) => {
+    
     const transferId = req.body.transferId;
     const { value, type, description } = res.locals.transfer;
+    const userId = res.locals.id;
 
     try {
         const transfer = await db.collection("transfers").findOne({ id: transferId });
-        console.log('todelt', transfer)
-        if(transfer.userId != userId) return res.sendStatus(401);
+        if(!transfer.userId.equals(userId)) return res.sendStatus(401);
         const transferUpdate = await db.collection("transfer").updateOne({ id: transferId }, { value, type, description });
         return res.sendStatus(200);
     } catch (error) {
@@ -66,4 +65,4 @@ export const putTransfer = async (req, res) => {
     }
 }
 
-export { getTransfers, addTransfer };
+export { getTransfers, addTransfer, deleteTransfer, putTransfer };

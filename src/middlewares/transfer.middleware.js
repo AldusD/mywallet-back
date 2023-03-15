@@ -11,7 +11,8 @@ const transferSchema = joi.object({
 
 const verifyTokenMiddleware = async (req, res, next) => {
     const token = req.headers.authorization?.replace('Bearer ', '');
-    const id = req.params.id || req.body.userId;
+    const id = req.params.id;
+
     try {
         const session = await db.collection("sessions").findOne({ token });
         if(!session) return res.status(401).send("Desconnected.");
@@ -24,7 +25,6 @@ const verifyTokenMiddleware = async (req, res, next) => {
         return res.sendStatus(500);
     }
 
-    console.log('mid')
     res.locals.id = { id };
     next();
 }
