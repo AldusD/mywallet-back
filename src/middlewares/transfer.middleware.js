@@ -9,9 +9,15 @@ const transferSchema = joi.object({
     description: joi.string().required()
 });
 
+const changeTransferSchema = joi.object({
+    value: joi.number().required(),
+    description: joi.string().required()
+});
+
 const verifyTokenMiddleware = async (req, res, next) => {
     const token = req.headers.authorization?.replace('Bearer ', '');
     const id = req.params.id;
+    console.log(token, id)
 
     try {
         const session = await db.collection("sessions").findOne({ token });
@@ -39,4 +45,14 @@ const addTransferMiddleware = (req, res, next) => {
     next();
 }
 
-export { verifyTokenMiddleware, addTransferMiddleware };
+const changeTransferMiddleware = (req, res, next) => {
+    const { value, description } = req.body;
+    
+    const isValid = changeTransferSchema.validate({ value, description }, { abortEarly: true } );
+    if(isValid.error) return res.status(422).send(isValid.error.message);
+
+    res.locals.transfer = { value, description };
+    next();
+}
+
+export { verifyTokenMiddleware, addTransferMiddleware, changeTransferMiddleware };

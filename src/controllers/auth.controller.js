@@ -38,6 +38,7 @@ const signup = async (req, res) => {
 
 const logout = async (req, res) => {
     const id = res.locals.id;
+    console.log('id', id)
     try {
         await db.collection("sessions").deleteMany({ userId: id });
         return res.sendStatus(204);
