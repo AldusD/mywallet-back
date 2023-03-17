@@ -17,7 +17,7 @@ const changeTransferSchema = joi.object({
 const verifyTokenMiddleware = async (req, res, next) => {
     const token = req.headers.authorization?.replace('Bearer ', '');
     const id = req.params.id;
-    console.log(token, id)
+    console.log('tok-id', token, id)
 
     try {
         const session = await db.collection("sessions").findOne({ token });

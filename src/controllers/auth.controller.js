@@ -12,7 +12,7 @@ const login = async (req, res) => {
         const isCorrect = bcrypt.compareSync(user.password, dbUser.password);
         if(!isCorrect) return res.status(401).send("Invalid password");
         const token = uuid();
-        const session = await db.collection("sessions").insertOne({ userId: dbUser._id, token});
+        const session = await db.collection("sessions").insertOne({ userId: dbUser._id, token });
         return res.status(200).send({ id: dbUser._id, token, name: dbUser.name });
     
     } catch (error) {
@@ -40,7 +40,7 @@ const logout = async (req, res) => {
     const id = res.locals.id;
     console.log('id', id)
     try {
-        await db.collection("sessions").deleteMany({ userId: id });
+        await db.collection("sessions").deleteMany({ userId: id.id });
         return res.sendStatus(204);
     } catch (error) {
         console.error(error);
