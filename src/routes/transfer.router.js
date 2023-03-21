@@ -6,6 +6,8 @@ import * as controller from '../controllers/transfer.controller.js';
 const router = express.Router();
 
 router.get("/transfer/:id", middleware.verifyTokenMiddleware, controller.getTransfers);
-router.post("/transfer/:id",middleware.verifyTokenMiddleware, middleware.addTransferMiddleware, controller.addTransfer);
+router.post("/transfer/:id", middleware.verifyTokenMiddleware, middleware.addTransferMiddleware, controller.addTransfer);
+router.put("/transfer/:id", middleware.changeTransferMiddleware, middleware.verifyTokenMiddleware, controller.putTransfer);
+router.delete("/transfer/:id", middleware.verifyTokenMiddleware, controller.deleteTransfer);
 
-export default router;
+export default router;  

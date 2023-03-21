@@ -8,6 +8,6 @@ const router = express.Router();
 
 router.post("/signup", middlewares.signupMiddleware, controller.signup);
 router.post("/login", middlewares.loginMiddleware, controller.login);
-router.post("/logout", transferMiddlewares.verifyTokenMiddleware, controller.logout);
+router.post("/logout/:id", transferMiddlewares.verifyTokenMiddleware, controller.logout);
 
 export default router;
