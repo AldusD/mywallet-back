@@ -10,4 +10,4 @@ router.post("/transfer/:id", middleware.verifyTokenMiddleware, middleware.addTra
 router.put("/transfer/:id", middleware.changeTransferMiddleware, middleware.verifyTokenMiddleware, controller.putTransfer);
 router.delete("/transfer/:id", middleware.verifyTokenMiddleware, controller.deleteTransfer);
 
-export default router;
+export default router;  
