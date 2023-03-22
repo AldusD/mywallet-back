@@ -6,8 +6,7 @@
 
 *MyWallet is mobile responsive only*
 
-*[App Deploy](https://mywalletfinances.vercel.app)*
-
+*[App Deploy](https://mywalletfinances.vercel.app)* |
 *[Front-end repository](https://github.com/AldusD/mywallet-front)*
 
 As one of the weekly projects from Driven Education's Full Stack Web Development Bootcamp, MyWallet was meant to reinforce the following learnt knowledge:
