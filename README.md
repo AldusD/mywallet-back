@@ -1,12 +1,14 @@
 # mywallet-back
 
+[Leia esta página em português](https://github.com/AldusD/mywallet-back/blob/main/README-pt.md)
+
 ## API of MyWallet app that allows users to create, edit and persist their data.
 
 *MyWallet is mobile responsive only*
 
-*Active deploy at: https://mywalletfinances.vercel.app*
+*[App Deploy](https://mywalletfinances.vercel.app)*
 
-*Front-end repository: https://github.com/AldusD/mywallet-front*
+*[Front-end repository](https://github.com/AldusD/mywallet-front)*
 
 As one of the weekly projects from Driven Education's Full Stack Web Development Bootcamp, MyWallet was meant to reinforce the following learnt knowledge:
 - Registering users and saving password with criptography
